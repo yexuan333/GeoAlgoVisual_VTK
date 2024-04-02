@@ -1,0 +1,5 @@
+build/**
+runtime/**
+.vscode/**
+package/**
+env.cmake
