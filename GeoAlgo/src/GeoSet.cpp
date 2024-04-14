@@ -1,7 +1,7 @@
 #include "Container.h"
 #include <string>
 
-void Container::AddMathPoint(const MathPoint& point)
+void Container::AddPoint3d(const Point3d& point)
 {
 	m_points.push_back(point);
 }
@@ -24,7 +24,7 @@ void Container::Read(std::string&& filename)
 	file >> pointsize;
 	for (int i = 0; i < pointsize; i++)
 	{
-		MathPoint p;
+		Point3d p;
 		p.deserialise(file);
 		m_points.push_back(p);
 	}

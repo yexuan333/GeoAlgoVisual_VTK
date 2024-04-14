@@ -8,8 +8,8 @@ else()
   message(FATAL_ERROR "Plaease Make env.cmake")
 endif()
 
-list(APPEND CMAKE_PREFIX_PATH ${VCPKG_Path})
-# set(CMAKE_TOOLCHAIN_FILE "E:/vcpkg/scripts/buildsystems/vcpkg.cmake")
+# list(APPEND CMAKE_PREFIX_PATH ${VCPKG_Path})
+set(CMAKE_TOOLCHAIN_FILE "${VCPKG_Path}/scripts/buildsystems/vcpkg.cmake")
 
 # Specify MSVC UTF-8 encoding   
 add_compile_options("$<$<C_COMPILER_ID:MSVC>:/utf-8>")
@@ -28,4 +28,4 @@ project(GeoAlgoVisual_VTK)
 
 # cpp
 add_subdirectory(${CMAKE_SOURCE_DIR}/GeoAlgo)
-# add_subdirectory(${CMAKE_SOURCE_DIR}/VTK_Viewer)
+add_subdirectory(${CMAKE_SOURCE_DIR}/VTK_Viewer)

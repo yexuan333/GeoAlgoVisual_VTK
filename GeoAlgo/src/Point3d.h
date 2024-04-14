@@ -1,19 +1,19 @@
 #pragma once
 #include "Stdafx.h"
-#include "MathVector.h"
+#include "Vector3d.h"
 #include <fstream>
 #include "StreamUtil.h"
 
-class MathPoint 
+class Point3d 
 {
 public:
-  MathPoint() : x(0.),y (0.),z (0.){}
-  MathPoint (const double theX, const double theY, const double theZ) : x (theX), y (theY), z (theZ){}
+  Point3d() : x(0.),y (0.),z (0.){}
+  Point3d (const double theX, const double theY, const double theZ) : x (theX), y (theY), z (theZ){}
   SETTERANDGETTER(double, X, x)
   SETTERANDGETTER(double, Y, y)
   SETTERANDGETTER(double, Z, z)
-  explicit operator MathVector() const {
-	  return MathVector(x, y, z);
+  explicit operator Vector3d() const {
+	  return Vector3d(x, y, z);
   }
   double getCoor(int index) {
       if (index == 0) {
@@ -36,14 +36,14 @@ public:
   void deserialise(std::ifstream& stream) {
 	  stream >> x >> y >> z;
   }
-  MathPoint operator +(const MathPoint& other) {
-	  return MathPoint(x + other.x, y + other.y, z + other.z);
+  Point3d operator +(const Point3d& other) {
+	  return Point3d(x + other.x, y + other.y, z + other.z);
   }
-  MathPoint operator /(double factor) {
-	  return MathPoint(x / factor, y / factor, z / factor);
+  Point3d operator /(double factor) {
+	  return Point3d(x / factor, y / factor, z / factor);
   }
-  MathVector operator -(const MathPoint& other) {
-	  return MathVector(x - other.x, y - other.y, z - other.z);
+  Vector3d operator -(const Point3d& other) {
+	  return Vector3d(x - other.x, y - other.y, z - other.z);
   }
 private:
   double x;

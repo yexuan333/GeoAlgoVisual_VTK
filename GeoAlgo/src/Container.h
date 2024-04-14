@@ -1,16 +1,16 @@
 #pragma once
 
 #include "Stdafx.h"
-#include "MathPoint.h"
+#include "Point3d.h"
 class Container
 {
 public:
     Container() {}
     ~Container() {}
-void AddMathPoint (const MathPoint& S);
+void AddPoint3d (const Point3d& S);
 void Wirte(std::string&& filename);
 void Read(std::string&& file);
-GETTER(std::vector<MathPoint>, Points, m_points)
+GETTER(std::vector<Point3d>, Points, m_points)
 private:
-    std::vector<MathPoint> m_points;
+    std::vector<Point3d> m_points;
 };

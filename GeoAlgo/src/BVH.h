@@ -6,7 +6,7 @@
 
 template <typename T>
 struct Bin {
-    MathBox box;
+    Box box;
     std::vector<BVHNode<T>*> nodes;
     Bin() = default;
     double cost() const {
@@ -37,11 +37,11 @@ public:
         m_root = new BVHNode<T>();
         m_root->setType(NodeType::Root);
     }
-    void Init(const std::vector<MathPoint> points) {
+    void Init(const std::vector<Point3d> points) {
         m_root->reserve(points.size());
         for (int i = 0; i < points.size(); i++)
         {
-            auto node = new BVHNode<MathPoint>(points[i], MathBox(points[i], points[i]));
+            auto node = new BVHNode<Point3d>(points[i], Box(points[i], points[i]));
             m_root->addChild(node);
         }
         trysplitnode(m_root);
@@ -62,7 +62,7 @@ public:
             stack.push(node->getChild(1));
         }
     }
-    int get_largest_axis(MathBox& box) {
+    int get_largest_axis(Box& box) {
         auto diagonal = box.getDiagonal();
 
         int largest = -1;
@@ -82,15 +82,15 @@ public:
         
         auto scale = (double)BinCount / diagonal;
         auto low = node->getBox().getLow();
-        auto offset = MathVector(low.getX() * scale.getX() * -1,
+        auto offset = Vector3d(low.getX() * scale.getX() * -1,
             low.getY() * scale.getY() * -1,
             low.getZ() * scale.getZ() * -1);
 
         std::vector<Bin<T>> bins(8);
         for (int i = 0; i < node->childrenSize(); i++) {
             auto child = node->getChild(i);
-            MathPoint center = child->getBox().getBoxCenter();
-            auto pos = MathVector(center.getX() * scale.getX(),
+            Point3d center = child->getBox().getBoxCenter();
+            auto pos = Vector3d(center.getX() * scale.getX(),
                 center.getX() * scale.getX(),
                 center.getX() * scale.getX()) + offset;
 
@@ -191,11 +191,11 @@ public:
     }
 
     // template<typename T>
-    // void IntersectBody(CGMPart* part, const CATMathBox& box, T cellback) {
+    // void IntersectBody(CGMPart* part, const CATBox& box, T cellback) {
     //     std::stack<BVHNode*> stack;
     //     stack.push(m_root);
 
-    //     std::vector<CATMathBox> searchItem;
+    //     std::vector<CATBox> searchItem;
     //     searchItem.push_back(box);
 
     //     while (!stack.empty())

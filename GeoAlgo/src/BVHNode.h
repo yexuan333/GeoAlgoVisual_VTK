@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Stdafx.h"
-#include "MathBox.h"
+#include "Box.h"
 
 enum class NodeType {
 	None,
@@ -15,9 +15,9 @@ class BVHNode
 {
 public:
 	BVHNode() = default;
-	BVHNode(T data, const MathBox& box) : m_data(data), m_box(box){}
+	BVHNode(T data, const Box& box) : m_data(data), m_box(box){}
 	SETTERANDGETTER(NodeType, Type, m_type)
-	GETTER(MathBox, Box, m_box)
+	GETTER(Box, Box, m_box)
 	void addChild(BVHNode<T>* node) {
 		m_box.unionBox(node->m_box);
 		m_children.push_back(node);
@@ -40,7 +40,7 @@ public:
 	~BVHNode() {}
 private:
 	T m_data;
-	MathBox m_box;
+	Box m_box;
 	std::vector<BVHNode<T>*> m_children;
 	NodeType m_type;
 };
