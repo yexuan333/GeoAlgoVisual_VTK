@@ -6,6 +6,7 @@
 #include "DisplayStyle.h"
 #include "BVH.h"
 #include "SketcherInteractorStyle.h"
+#include "CommandController.h"
 
 namespace Ui {
 class MainWindow;
@@ -29,5 +30,6 @@ private:
   QVTKOpenGLNativeWidget* qvtkWidget = nullptr;
   vtkNew<vtkRenderer> m_renderer;
   LogStream* m_logStream = nullptr;
+  CommandController controller;
   DisplayStyle m_style;
 };

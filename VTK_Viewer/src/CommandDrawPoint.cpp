@@ -1,0 +1,2 @@
+#include "CommandDrawPoint.h"
+
